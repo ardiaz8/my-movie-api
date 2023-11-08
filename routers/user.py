@@ -5,8 +5,9 @@ from schemas.user import User
 
 user_router = APIRouter()
 
+# Function to do user login
 @user_router.post('/login', tags=['AuthenticationTest'])
 def login(user: User):
     if user.email == "admin@gmail.com" and user.password == "admin":
-        token: str = create_token(user.model_dump())
+        token: str = create_token(user.model_dump())           # Generate token
         return JSONResponse(status_code=200, content=token)
