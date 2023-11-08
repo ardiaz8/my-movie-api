@@ -32,6 +32,7 @@ def home_page():
         </head>
         <body>
             <h1>Welcome to the Movie Description API</h1>
+            <p>You can create, read, update or delete any movie</p>
         </body>
     </html>
     """)
