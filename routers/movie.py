@@ -52,7 +52,7 @@ def update_movie(id: int, movie: Movie) -> dict:
 @movie_router.delete('/movies/{id}', tags=['Movies'], response_model=dict, status_code=200)
 def delete_movie(id: int) -> dict:
     db = Session()
-    result = MovieModel = db.query(MovieModel).filter(MovieModel.id == id).first()
+    result : MovieModel = db.query(MovieModel).filter(MovieModel.id == id).first()
     if not result:
         return JSONResponse(status_code=404, content={"Message:": "Movie not found"})
     MovieService(db).delete_movie(id)

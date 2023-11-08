@@ -5,35 +5,34 @@ from middlewares.error_handler import ErrorHandler
 from routers.movie import movie_router
 from routers.user import user_router
 
+# FastAPI instance
 app = FastAPI()
 app.title = "My FastApi App"
 app.version = "0.0.1"
 
+# Add the error handler
 app.add_middleware(ErrorHandler)
+
+# Include the movie router
 app.include_router(movie_router)
+
+# Include the user router
 app.include_router(user_router)
 
+# Create the database tables
 Base.metadata.create_all(bind=engine)
 
-movies = [
-    {
-        'id': 1,
-        'title': 'Avatar',
-        'overview': "On a lush planet called Pandora, the Na'vi live. . .",
-        'year': '2009',
-        'rating': 7.8,
-        'category': 'Action'    
-    },
-    {
-        'id': 2,
-        'title': 'Avatar',
-        'overview': "On a lush planet called Pandora, the Na'vi live. . .",
-        'year': '2009',
-        'rating': 7.8,
-        'category': 'Action'    
-    } 
-]
-
+# Function to get the home page
 @app.get('/', tags=['Home'])
-def message():
-    return HTMLResponse('<h1>Hello World!</h1>')
+def home_page():
+    message = HTMLResponse("""  
+    <html>
+        <head>
+            <title>Movies API</title>
+        </head>
+        <body>
+            <h1>Welcome to the Movie Description API</h1>
+        </body>
+    </html>
+    """)
+    return message
